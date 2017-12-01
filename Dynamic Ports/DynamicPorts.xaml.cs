@@ -127,7 +127,6 @@ namespace DynamicPorts
             }
         }
 
-        abc
         private void RemoveConnectedLinks(Node node, String portname)
         {
             var model = myDiagram.Model as CustomModel;
