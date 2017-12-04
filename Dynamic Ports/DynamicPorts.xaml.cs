@@ -28,11 +28,13 @@ namespace DynamicPorts
             myDiagram.PartManager = new CustomPartManager();
 
             var model = new CustomModel();
-            string xml;
-
-            if (File.Exists(Environment.CurrentDirectory + "\\config.xml"))
+            string xml="";
+            string url = Environment.CurrentDirectory + "\\config.xml";
+            if (File.Exists(url))
             {
-
+                XmlDocument xd = new XmlDocument();
+                xd.Load(url);
+                xml = xd.InnerXml;
             }
             else
             {
@@ -170,7 +172,6 @@ namespace DynamicPorts
             XmlDocument xdc = new XmlDocument();
             xdc.LoadXml(SavedXML);
             xdc.Save(Environment.CurrentDirectory + "\\config.xml");
-            
 
             //System.Resources.ResourceWriter write = new System.Resources.ResourceWriter("config.xml");
             //write.AddResource("a", SavedXML);
