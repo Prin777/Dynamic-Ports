@@ -1,72 +1,55 @@
-﻿<!--<Diagram>
-  <Unit Key="one" Location="50 110" Text="Unit one">
-    <Socket Name="L0" Side="Left" Color="Red" />
-    <Socket Name="L1" Side="Left" Color="Red" />
-    <Socket Name="L2" Side="Left" Color="Red" />
-
-    <Socket Name="R0" Side="Right" Color="Blue" />
-    <Socket Name="R1" Side="Right" Index="1" Color="Green" />
-    <Socket Name="T1" Side="Top" Color="Green" />
-    <Socket Name="B1" Side="Bottom" Color="Red" />
+﻿<Diagram>
+  <Unit Key="Unit" Location="490 320" Text="U1">
+    <Socket Name="L9" Side="Left" Color="Red" />
+    <Socket Name="R1" Side="Right" Color="Blue" />
+    <Socket Name="R8" Side="Right" Index="1" Color="Green" />
+    <Socket Name="R7" Side="Right" Index="2" Color="Orange" />
   </Unit>
-  <Unit Key="two" Location="218 52" Text="Unit two">
-    <Socket Name="L0" Side="Left" Color="Green" />
-    <Socket Name="L1" Side="Left" Index="1" Color="Orange" />
-    <Socket Name="L2" Side="Left" Index="2" Color="Red" />
-    <Socket Name="T1" Side="Top" Color="Purple" />
-    <Socket Name="B1" Side="Bottom" Color="Orange" />
-    <Socket Name="B2" Side="Bottom" Index="1" Color="Red" />
-    <Socket Name="B3" Side="Bottom" Index="2" />
-  </Unit>
-  <Unit Key="three" Location="251 175" Text="Unit three">
-    <Socket Name="L0" Side="Left" Color="Green" />
-    <Socket Name="L1" Side="Left" Index="1" Color="Orange" />
-    <Socket Name="L2" Side="Left" Index="2" Color="Red" />
-    <Socket Name="T1" Side="Top" Color="Purple" />
-    <Socket Name="B1" Side="Bottom" Color="Green" />
-  </Unit>
-  <Unit Key="four" Location="83 233" Text="Unit four">
-    <Socket Name="L0" Side="Left" Color="Red" />
-    <Socket Name="R0" Side="Right" Color="Blue" />
-    <Socket Name="R1" Side="Right" Index="1" Color="Green" />
-    <Socket Name="T1" Side="Top" />
-    <Socket Name="B1" Side="Bottom" Color="Violet" />
-  </Unit>
-  <Wire From="one" To="two" FromPort="R30" ToPort="L2" />
-  <Wire From="one" To="two" FromPort="R0" ToPort="L1" />
-  <Wire From="one" To="four" FromPort="B1" ToPort="T1" />
-  <Wire From="two" To="three" FromPort="B2" ToPort="T1" />
-  <Wire From="two" To="four" FromPort="B1" ToPort="T1" />
-  <Wire From="four" To="three" FromPort="R0" ToPort="L0" />
-  <Wire From="four" To="three" FromPort="R1" ToPort="L2" />
-</Diagram>-->
-<Diagram>
-  <Unit Key="one" Location="159 101" Text="Unit one">
-    <Socket Name="L2" Side="Left" Color="Red" />
-    <Socket Name="R0" Side="Right" Color="Blue" />
-    <Socket Name="R1" Side="Right" Index="1" Color="Green" />
-  </Unit>
-  <Unit Key="two" Location="950 174" Text="Unit two">
+  <Unit Key="Unit 2" Location="679 436" Text="U4">
     <Socket Name="L1" Side="Left" Color="Orange" />
-    <Socket Name="L2" Side="Left" Index="1" Color="Red" />
-    <Socket Name="L3" Side="Left" Index="2" Color="Blue" />
+    <Socket Name="R1" Side="Right" Color="Green" />
+    <Socket Name="R2" Side="Right" Index="1" Color="Blue" />
+    <Socket Name="R3" Side="Right" Index="2" Color="Purple" />
+    <Socket Name="R4" Side="Right" Index="3" Color="Orange" />
+  </Unit>
+  <Unit Key="Unit 3" Location="675 164" Text="U2">
+    <Socket Name="L1" Side="Left" Color="Blue" />
+    <Socket Name="R1" Side="Right" Color="Violet" />
+    <Socket Name="R2" Side="Right" Index="1" Color="Purple" />
+  </Unit>
+  <Unit Key="Unit 4" Location="678 302" Text="U3">
+    <Socket Name="L1" Side="Left" Color="Green" />
+    <Socket Name="R1" Side="Right" Color="Blue" />
+    <Socket Name="R2" Side="Right" Index="1" />
+  </Unit>
+  <Unit Key="Unit 5" Location="1028 386" Text="U7">
+    <Socket Name="L2" Side="Left" Color="Blue" />
+    <Socket Name="L1" Side="Left" Index="1" Color="Orange" />
+    <Socket Name="R8" Side="Right" Color="Purple" />
+  </Unit>
+  <Unit Key="Unit 6" Location="861 201" Text="U5">
+    <Socket Name="L1" Side="Left" Color="Purple" />
+    <Socket Name="R10" Side="Right" Color="Blue" />
+    <Socket Name="R11" Side="Right" Index="1" Color="Orange" />
+  </Unit>
+  <Unit Key="Unit 7" Location="1179 298" Text="U8">
+    <Socket Name="L3" Side="Left" Color="Purple" />
+    <Socket Name="L1" Side="Left" Index="1" Color="Orange" />
+    <Socket Name="R15" Side="Right" Color="Green" />
+  </Unit>
+  <Unit Key="Unit 8" Location="1025 194" Text="U6">
+    <Socket Name="L1" Side="Left" Color="Blue" />
     <Socket Name="R1" Side="Right" Color="Orange" />
   </Unit>
-  <Unit Key="three" Location="566 439" Text="Unit three">
-    <Socket Name="L0" Side="Left" Color="Green" />
-    <Socket Name="L2" Side="Left" Index="1" Color="Red" />
-    <Socket Name="R2" Side="Right" Color="Orange" />
-    <Socket Name="R3" Side="Right" Index="1" Color="Purple" />
-  </Unit>
-  <Unit Key="four" Location="384 282" Text="Unit four">
-    <Socket Name="L0" Side="Left" Color="Red" />
-    <Socket Name="R0" Side="Right" Color="Blue" />
-    <Socket Name="R1" Side="Right" Index="1" Color="Green" />
-  </Unit>
-  <Wire From="four" To="three" FromPort="R0" ToPort="L0" Points="474.33333333333337 300 492.33333333333337 300 534.66666666666674 300 534.66666666666674 457 557 457 571 457" />
-  <Wire From="four" To="three" FromPort="R1" ToPort="L2" Points="474.33333333333337 314 484.33333333333337 314 526.66666666666674 314 526.66666666666674 471 549 471 571 471" />
-  <Wire From="one" To="four" FromPort="R1" ToPort="L0" Points="247.4 133 257.4 133 326.2 133 326.2 307 375 307 389 307" />
-  <Wire From="three" To="two" FromPort="R3" ToPort="L2" Points="662.63 471 684.63 471 820.815 471 820.815 199 937 199 955 199" />
-  <Wire From="three" To="two" FromPort="R2" ToPort="L1" Points="662.63 457 676.63 457 812.815 457 812.815 185 929 185 955 185" />
-  <Wire From="one" To="two" FromPort="R0" ToPort="L3" Points="247.4 119 265.4 119 605.2 119 605.2 213 925 213 955 213" />
+  <Wire From="Unit" To="Unit 3" FromPort="R1" ToPort="L1" Points="571 331 585 331 637.5 331 637.5 189 670 189 680 189" />
+  <Wire From="Unit 3" To="Unit 6" FromPort="R2" ToPort="L1" Points="756 196 766 196 819 196 819 226 852 226 866 226" />
+  <Wire From="Unit 4" To="Unit 5" FromPort="R1" ToPort="L2" Points="759 320 777 320 908 320 908 404 1019 404 1033 404" />
+  <Wire From="Unit 2" To="Unit 5" FromPort="R2" ToPort="L2" Points="760 457 782 457 908.5 457 908.5 404 1015 404 1033 404" />
+  <Wire From="Unit" To="Unit 4" FromPort="R8" ToPort="L1" Points="571 345 593 345 643 345 643 327 673 327 683 327" />
+  <Wire From="Unit" To="Unit 2" FromPort="R7" ToPort="L1" Points="571 359 581 359 635.5 359 635.5 464 670 464 684 464" />
+  <Wire From="Unit 2" To="Unit 6" FromPort="R3" ToPort="L1" Points="760 471 790 471 833 471 833 226 856 226 866 226" />
+  <Wire From="Unit 6" To="Unit 8" FromPort="R10" ToPort="L1" Points="942 219 960 219 1000 219 1000 219 1020 219 1030 219" />
+  <Wire From="Unit 6" To="Unit 5" FromPort="R11" ToPort="L1" Points="942 233 952 233 991.5 233 991.5 418 1011 418 1033 418" />
+  <Wire From="Unit 8" To="Unit 7" FromPort="R1" ToPort="L1" Points="1106 219 1116 219 1149 219 1149 330 1162 330 1184 330" />
+  <Wire From="Unit 5" To="Unit 7" FromPort="R8" ToPort="L3" Points="1109 411 1123 411 1154.5 411 1154.5 316 1166 316 1184 316" />
 </Diagram>
