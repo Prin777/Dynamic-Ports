@@ -30,6 +30,7 @@ namespace DynamicPorts
             var model = new CustomModel();
             string xml="";
             string url = Environment.CurrentDirectory + "\\config.xml";
+            //if xml existed, read it
             if (File.Exists(url))
             {
                 XmlDocument xd = new XmlDocument();
