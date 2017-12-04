@@ -1,18 +1,19 @@
 ﻿/* Copyright © Northwoods Software Corporation, 2008-2013. All Rights Reserved. */
 
+using Northwoods.GoXam;
+using Northwoods.GoXam.Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Xml;
 using System.Xml.Linq;
-using Northwoods.GoXam;
-using Northwoods.GoXam.Model;
-using System.IO;
-using System.Reflection;
 
 namespace DynamicPorts
 {
@@ -27,8 +28,17 @@ namespace DynamicPorts
             myDiagram.PartManager = new CustomPartManager();
 
             var model = new CustomModel();
-            // initialize it from data in an XML file that is an embedded resource
-            string xml = LoadText("DynamicPorts", "xml");
+            string xml;
+
+            if (File.Exists(Environment.CurrentDirectory + "\\config.xml"))
+            {
+
+            }
+            else
+            {
+                // initialize it from data in an XML file that is an embedded resource
+                xml = LoadText("DynamicPorts", "xml");
+            }
             // set the Route.Points after nodes have been built and the layout has finished
             myDiagram.LayoutCompleted += UpdateRoutes;
             model.Load<Unit, Wire>(XElement.Parse(xml), "Unit", "Wire");
@@ -156,6 +166,15 @@ namespace DynamicPorts
             }
             XElement root = model.Save<Unit, Wire>("Diagram", "Unit", "Wire");
             SavedXML = root.ToString();
+            // save to DynamicPorts.xml
+            XmlDocument xdc = new XmlDocument();
+            xdc.LoadXml(SavedXML);
+            xdc.Save(Environment.CurrentDirectory + "\\config.xml");
+            
+
+            //System.Resources.ResourceWriter write = new System.Resources.ResourceWriter("config.xml");
+            //write.AddResource("a", SavedXML);
+
             LoadButton.IsEnabled = true;
             model.IsModified = false;
         }
