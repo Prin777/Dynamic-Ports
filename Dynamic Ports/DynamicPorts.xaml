@@ -153,8 +153,8 @@
         </go:Diagram>
         <StackPanel Grid.Row="0" Orientation="Horizontal"
                 HorizontalAlignment="Right" VerticalAlignment="Top">
-            <!--<Button Content="Save" Click="Save_Click" />
-            <Button Content="Load" Click="Load_Click" x:Name="LoadButton" IsEnabled="False" />-->
+            <Button Content="Save" Click="Save_Click" />
+            <Button Content="Load" Click="Load_Click" x:Name="LoadButton" IsEnabled="False" />
         </StackPanel>
         <StackPanel Grid.Row="1" Orientation="Horizontal">
             <TextBlock Text="Add a port to a side of the selected node: " VerticalAlignment="Center" />
@@ -162,10 +162,10 @@
               IsEnabled="{Binding ElementName=myDiagram, Path=SelectedNode, Converter={StaticResource theNullBooleanConverter}}" />
             <Button Content="Right" Click="Button_Add" Tag="Right"
               IsEnabled="{Binding ElementName=myDiagram, Path=SelectedNode, Converter={StaticResource theNullBooleanConverter}}" />
-            <Button Content="Top" Click="Button_Add" Tag="Top"
+            <!--<Button Content="Top" Click="Button_Add" Tag="Top"
               IsEnabled="{Binding ElementName=myDiagram, Path=SelectedNode, Converter={StaticResource theNullBooleanConverter}}" />
             <Button Content="Bottom" Click="Button_Add" Tag="Bottom"
-              IsEnabled="{Binding ElementName=myDiagram, Path=SelectedNode, Converter={StaticResource theNullBooleanConverter}}" />
+              IsEnabled="{Binding ElementName=myDiagram, Path=SelectedNode, Converter={StaticResource theNullBooleanConverter}}" />-->
         </StackPanel>
         <TextBlock Grid.Row="2" Text="Context click a port to remove it" />
         <TextBlock Grid.Row="3" Text="Double click in background to create a new node" />

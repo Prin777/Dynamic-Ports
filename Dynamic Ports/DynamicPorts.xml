@@ -1,4 +1,4 @@
-﻿<Diagram>
+﻿<!--<Diagram>
   <Unit Key="one" Location="50 110" Text="Unit one">
     <Socket Name="L0" Side="Left" Color="Red" />
     <Socket Name="L1" Side="Left" Color="Red" />
@@ -39,4 +39,34 @@
   <Wire From="two" To="four" FromPort="B1" ToPort="T1" />
   <Wire From="four" To="three" FromPort="R0" ToPort="L0" />
   <Wire From="four" To="three" FromPort="R1" ToPort="L2" />
+</Diagram>-->
+<Diagram>
+  <Unit Key="one" Location="159 101" Text="Unit one">
+    <Socket Name="L2" Side="Left" Color="Red" />
+    <Socket Name="R0" Side="Right" Color="Blue" />
+    <Socket Name="R1" Side="Right" Index="1" Color="Green" />
+  </Unit>
+  <Unit Key="two" Location="950 174" Text="Unit two">
+    <Socket Name="L1" Side="Left" Color="Orange" />
+    <Socket Name="L2" Side="Left" Index="1" Color="Red" />
+    <Socket Name="L3" Side="Left" Index="2" Color="Blue" />
+    <Socket Name="R1" Side="Right" Color="Orange" />
+  </Unit>
+  <Unit Key="three" Location="566 439" Text="Unit three">
+    <Socket Name="L0" Side="Left" Color="Green" />
+    <Socket Name="L2" Side="Left" Index="1" Color="Red" />
+    <Socket Name="R2" Side="Right" Color="Orange" />
+    <Socket Name="R3" Side="Right" Index="1" Color="Purple" />
+  </Unit>
+  <Unit Key="four" Location="384 282" Text="Unit four">
+    <Socket Name="L0" Side="Left" Color="Red" />
+    <Socket Name="R0" Side="Right" Color="Blue" />
+    <Socket Name="R1" Side="Right" Index="1" Color="Green" />
+  </Unit>
+  <Wire From="four" To="three" FromPort="R0" ToPort="L0" Points="474.33333333333337 300 492.33333333333337 300 534.66666666666674 300 534.66666666666674 457 557 457 571 457" />
+  <Wire From="four" To="three" FromPort="R1" ToPort="L2" Points="474.33333333333337 314 484.33333333333337 314 526.66666666666674 314 526.66666666666674 471 549 471 571 471" />
+  <Wire From="one" To="four" FromPort="R1" ToPort="L0" Points="247.4 133 257.4 133 326.2 133 326.2 307 375 307 389 307" />
+  <Wire From="three" To="two" FromPort="R3" ToPort="L2" Points="662.63 471 684.63 471 820.815 471 820.815 199 937 199 955 199" />
+  <Wire From="three" To="two" FromPort="R2" ToPort="L1" Points="662.63 457 676.63 457 812.815 457 812.815 185 929 185 955 185" />
+  <Wire From="one" To="two" FromPort="R0" ToPort="L3" Points="247.4 119 265.4 119 605.2 119 605.2 213 925 213 955 213" />
 </Diagram>

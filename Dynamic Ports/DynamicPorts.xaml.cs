@@ -57,6 +57,9 @@ namespace DynamicPorts
                 return "";
             }
         }
+
+        private string SavedXML;
+
         public Stream GetStream(string name, string extension)
         {
             try
@@ -89,8 +92,8 @@ namespace DynamicPorts
                     {
                         case "Left": prefix = "L"; break;
                         case "Right": prefix = "R"; break;
-                        case "Top": prefix = "T"; break;
-                        case "Bottom": prefix = "B"; break;
+                        //case "Top": prefix = "T"; break;
+                        //case "Bottom": prefix = "B"; break;
                     }
                     // find unique socket name for the given side
                     int i = 1;
@@ -138,44 +141,44 @@ namespace DynamicPorts
         }
 
         // save and load the model data as XML, visible in the "Saved" tab of the Demo
-        //private void Save_Click(object sender, RoutedEventArgs e)
-        //{
-        //    var model = myDiagram.Model as CustomModel;
-        //    if (model == null) return;
-        //    // copy the Route.Points into each Transition data
-        //    foreach (Link link in myDiagram.Links)
-        //    {
-        //        Wire wire = link.Data as Wire;
-        //        if (wire != null)
-        //        {
-        //            wire.Points = new List<Point>(link.Route.Points);
-        //        }
-        //    }
-        //    XElement root = model.Save<Unit, Wire>("Diagram", "Unit", "Wire");
-        //    Demo.MainPage.Instance.SavedXML = root.ToString();
-        //    LoadButton.IsEnabled = true;
-        //    model.IsModified = false;
-        //}
+        private void Save_Click(object sender, RoutedEventArgs e)
+        {
+            var model = myDiagram.Model as CustomModel;
+            if (model == null) return;
+            // copy the Route.Points into each Transition data
+            foreach (Link link in myDiagram.Links)
+            {
+                Wire wire = link.Data as Wire;
+                if (wire != null)
+                {
+                    wire.Points = new List<Point>(link.Route.Points);
+                }
+            }
+            XElement root = model.Save<Unit, Wire>("Diagram", "Unit", "Wire");
+            SavedXML = root.ToString();
+            LoadButton.IsEnabled = true;
+            model.IsModified = false;
+        }
 
-        //private void Load_Click(object sender, RoutedEventArgs e)
-        //{
-        //    var model = myDiagram.Model as CustomModel;
-        //    if (model == null) return;
-        //    try
-        //    {
-        //        XElement root = XElement.Parse(Demo.MainPage.Instance.SavedXML);
-        //        // set the Route.Points after nodes have been built and the layout has finished
-        //        myDiagram.LayoutCompleted += UpdateRoutes;
-        //        // tell the CustomPartManager that we're loading
-        //        myDiagram.PartManager.UpdatesRouteDataPoints = false;
-        //        model.Load<Unit, Wire>(root, "Unit", "Wire");
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show(ex.ToString());
-        //    }
-        //    model.IsModified = false;
-        //}
+        private void Load_Click(object sender, RoutedEventArgs e)
+        {
+            var model = myDiagram.Model as CustomModel;
+            if (model == null) return;
+            try
+            {
+                XElement root = XElement.Parse(SavedXML);
+                // set the Route.Points after nodes have been built and the layout has finished
+                myDiagram.LayoutCompleted += UpdateRoutes;
+                // tell the CustomPartManager that we're loading
+                myDiagram.PartManager.UpdatesRouteDataPoints = false;
+                model.Load<Unit, Wire>(root, "Unit", "Wire");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            model.IsModified = false;
+        }
 
         // only use the saved route points after the layout has completed,
         // because links will get the default routing
@@ -262,10 +265,10 @@ namespace DynamicPorts
             foreach (Socket s in this.LeftSockets) unit._LeftSockets.Add((Socket)s.Clone());
             unit._RightSockets = new ObservableCollection<Socket>();
             foreach (Socket s in this.RightSockets) unit._RightSockets.Add((Socket)s.Clone());
-            unit._TopSockets = new ObservableCollection<Socket>();
-            foreach (Socket s in this.TopSockets) unit._TopSockets.Add((Socket)s.Clone());
-            unit._BottomSockets = new ObservableCollection<Socket>();
-            foreach (Socket s in this.BottomSockets) unit._BottomSockets.Add((Socket)s.Clone());
+            //unit._TopSockets = new ObservableCollection<Socket>();
+            //foreach (Socket s in this.TopSockets) unit._TopSockets.Add((Socket)s.Clone());
+            //unit._BottomSockets = new ObservableCollection<Socket>();
+            //foreach (Socket s in this.BottomSockets) unit._BottomSockets.Add((Socket)s.Clone());
             // if you add properties that are not supposed to be shared, deal with them here
             return unit;
         }
