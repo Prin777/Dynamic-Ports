@@ -83,7 +83,7 @@
                     </ListBox.ItemTemplate>
                 </local:InertListBox>
 
-                <local:InertListBox Grid.Column="1" Grid.Row="0"
+                <!--<local:InertListBox Grid.Column="1" Grid.Row="0"
                  Style="{StaticResource InertListBoxStyle}"
                  ItemsPanel="{StaticResource HorizontalItemsPanel}"
                  ItemsSource="{Binding Path=Data.TopSockets}">
@@ -115,7 +115,7 @@
                             </Rectangle>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
-                </local:InertListBox>
+                </local:InertListBox>-->
             </Grid>
         </DataTemplate>
 
