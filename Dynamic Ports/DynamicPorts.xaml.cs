@@ -338,8 +338,8 @@ namespace DynamicPorts
             XElement e = base.MakeXElement(n);
             e.Add(this.LeftSockets.Select(s => s.MakeXElement()));
             e.Add(this.RightSockets.Select(s => s.MakeXElement()));
-            e.Add(this.TopSockets.Select(s => s.MakeXElement()));
-            e.Add(this.BottomSockets.Select(s => s.MakeXElement()));
+            //e.Add(this.TopSockets.Select(s => s.MakeXElement()));
+            //e.Add(this.BottomSockets.Select(s => s.MakeXElement()));
             return e;
         }
 
@@ -546,133 +546,133 @@ namespace DynamicPorts
         // no additional properties defined
     }
     
-    public class CustomRoute : Route
-    {
-        protected override double GetEndSegmentLength(Node node, FrameworkElement port, Spot spot, bool from)
-        {
-            double esl = base.GetEndSegmentLength(node, port, spot, from);//分割
-            Unit unit = node.Data as Unit;
-            if (unit != null)
-            {
-                Socket sock = unit.FindSocket(Node.GetPortId(port));
-                if (sock != null)
-                {
-                    var socks = unit.Find(sock.Side);
-                    Point thispt = node.GetElementPoint(port, from ? GetFromSpot() : GetToSpot());
-                    Point otherpt = this.Link.GetOtherNode(node).GetElementPoint(this.Link.GetOtherPort(port),
-                                                                                 from ? GetToSpot() : GetFromSpot());
-                    if (Math.Abs(thispt.X - otherpt.X) > 20 || Math.Abs(thispt.Y - otherpt.Y) > 20)
-                    {
-                        if (sock.Side == "Top" || sock.Side == "Bottom")
-                        {
-                            if (otherpt.X < thispt.X)
-                            {
-                                return esl + 4 + sock.Index * 8;
-                            }
-                            else
-                            {
-                                return esl + (socks.Count - sock.Index - 1) * 8;
-                            }
-                        }
-                        else
-                        {
-                            if (otherpt.Y < thispt.Y)
-                            {
-                                return esl + 4 + sock.Index * 8;
-                            }
-                            else
-                            {
-                                return esl + (socks.Count - sock.Index - 1) * 8;
-                            }
-                        }
-                    }
-                }
-            }
-            return esl;
-        }
+    //public class CustomRoute : Route
+    //{
+    //    protected override double GetEndSegmentLength(Node node, FrameworkElement port, Spot spot, bool from)
+    //    {
+    //        double esl = base.GetEndSegmentLength(node, port, spot, from);//分割
+    //        Unit unit = node.Data as Unit;
+    //        if (unit != null)
+    //        {
+    //            Socket sock = unit.FindSocket(Node.GetPortId(port));
+    //            if (sock != null)
+    //            {
+    //                var socks = unit.Find(sock.Side);
+    //                Point thispt = node.GetElementPoint(port, from ? GetFromSpot() : GetToSpot());
+    //                Point otherpt = this.Link.GetOtherNode(node).GetElementPoint(this.Link.GetOtherPort(port),
+    //                                                                             from ? GetToSpot() : GetFromSpot());
+    //                if (Math.Abs(thispt.X - otherpt.X) > 20 || Math.Abs(thispt.Y - otherpt.Y) > 20)
+    //                {
+    //                    if (sock.Side == "Top" || sock.Side == "Bottom")
+    //                    {
+    //                        if (otherpt.X < thispt.X)
+    //                        {
+    //                            return esl + 4 + sock.Index * 8;
+    //                        }
+    //                        else
+    //                        {
+    //                            return esl + (socks.Count - sock.Index - 1) * 8;
+    //                        }
+    //                    }
+    //                    else
+    //                    {
+    //                        if (otherpt.Y < thispt.Y)
+    //                        {
+    //                            return esl + 4 + sock.Index * 8;
+    //                        }
+    //                        else
+    //                        {
+    //                            return esl + (socks.Count - sock.Index - 1) * 8;
+    //                        }
+    //                    }
+    //                }
+    //            }
+    //        }
+    //        return esl;
+    //    }
 
-        protected override bool HasCurviness()//弯曲度
-        {
-            if (Double.IsNaN(this.Curviness)) return true;
-            return base.HasCurviness();
-        }
+    //    protected override bool HasCurviness()//弯曲度
+    //    {
+    //        if (Double.IsNaN(this.Curviness)) return true;
+    //        return base.HasCurviness();
+    //    }
 
-        protected override double ComputeCurviness()
-        {
-            if (Double.IsNaN(this.Curviness))
-            {
-                var fromnode = this.Link.FromNode;
-                var fromport = this.Link.FromPort;
-                var fromspot = GetFromSpot();
-                var frompt = fromnode.GetElementPoint(fromport, fromspot);
-                var tonode = this.Link.ToNode;
-                var toport = this.Link.ToPort;
-                var tospot = GetToSpot();
-                var topt = tonode.GetElementPoint(toport, tospot);
-                if (Math.Abs(frompt.X - topt.X) > 20 || Math.Abs(frompt.Y - topt.Y) > 20)
-                {
-                    if ((fromspot == Spot.MiddleLeft || fromspot == Spot.MiddleRight) &&
-                        (tospot == Spot.MiddleLeft || tospot == Spot.MiddleRight))
-                    {
-                        double fromseglen = GetEndSegmentLength(fromnode, fromport, fromspot, true);
-                        double toseglen = GetEndSegmentLength(tonode, toport, tospot, false);
-                        var c = (fromseglen - toseglen) / 2;
-                        if (frompt.X + fromseglen >= topt.X - toseglen)
-                        {
-                            if (frompt.Y < topt.Y) return c;
-                            if (frompt.Y > topt.Y) return -c;
-                        }
-                    }
-                    else if ((fromspot == Spot.MiddleTop || fromspot == Spot.MiddleBottom) &&
-                             (tospot == Spot.MiddleTop || tospot == Spot.MiddleBottom))
-                    {
-                        double fromseglen = GetEndSegmentLength(fromnode, fromport, fromspot, true);
-                        double toseglen = GetEndSegmentLength(tonode, toport, tospot, false);
-                        var c = (fromseglen - toseglen) / 2;
-                        if (frompt.Y + fromseglen >= topt.Y - toseglen)
-                        {
-                            if (frompt.X < topt.X) return c;
-                            if (frompt.X > topt.X) return -c;
-                        }
-                    }
-                }
-            }
-            return base.ComputeCurviness();
-        }
-        internal Spot GetFromSpot()
-        {
-            Spot s = this.FromSpot;
-            if (s.IsDefault)
-            {
-                Link link = this.Link;
-                if (link != null)
-                {
-                    FrameworkElement port = link.FromPort;
-                    if (port != null)
-                    {
-                        s = Node.GetFromSpot(port);  // normally, get Spot from the port
-                    }
-                }
-            }
-            return s;
-        }
+    //    protected override double ComputeCurviness()
+    //    {
+    //        if (Double.IsNaN(this.Curviness))
+    //        {
+    //            var fromnode = this.Link.FromNode;
+    //            var fromport = this.Link.FromPort;
+    //            var fromspot = GetFromSpot();
+    //            var frompt = fromnode.GetElementPoint(fromport, fromspot);
+    //            var tonode = this.Link.ToNode;
+    //            var toport = this.Link.ToPort;
+    //            var tospot = GetToSpot();
+    //            var topt = tonode.GetElementPoint(toport, tospot);
+    //            if (Math.Abs(frompt.X - topt.X) > 20 || Math.Abs(frompt.Y - topt.Y) > 20)
+    //            {
+    //                if ((fromspot == Spot.MiddleLeft || fromspot == Spot.MiddleRight) &&
+    //                    (tospot == Spot.MiddleLeft || tospot == Spot.MiddleRight))
+    //                {
+    //                    double fromseglen = GetEndSegmentLength(fromnode, fromport, fromspot, true);
+    //                    double toseglen = GetEndSegmentLength(tonode, toport, tospot, false);
+    //                    var c = (fromseglen - toseglen) / 2;
+    //                    if (frompt.X + fromseglen >= topt.X - toseglen)
+    //                    {
+    //                        if (frompt.Y < topt.Y) return c;
+    //                        if (frompt.Y > topt.Y) return -c;
+    //                    }
+    //                }
+    //                else if ((fromspot == Spot.MiddleTop || fromspot == Spot.MiddleBottom) &&
+    //                         (tospot == Spot.MiddleTop || tospot == Spot.MiddleBottom))
+    //                {
+    //                    double fromseglen = GetEndSegmentLength(fromnode, fromport, fromspot, true);
+    //                    double toseglen = GetEndSegmentLength(tonode, toport, tospot, false);
+    //                    var c = (fromseglen - toseglen) / 2;
+    //                    if (frompt.Y + fromseglen >= topt.Y - toseglen)
+    //                    {
+    //                        if (frompt.X < topt.X) return c;
+    //                        if (frompt.X > topt.X) return -c;
+    //                    }
+    //                }
+    //            }
+    //        }
+    //        return base.ComputeCurviness();
+    //    }
+    //    internal Spot GetFromSpot()
+    //    {
+    //        Spot s = this.FromSpot;
+    //        if (s.IsDefault)
+    //        {
+    //            Link link = this.Link;
+    //            if (link != null)
+    //            {
+    //                FrameworkElement port = link.FromPort;
+    //                if (port != null)
+    //                {
+    //                    s = Node.GetFromSpot(port);  // normally, get Spot from the port
+    //                }
+    //            }
+    //        }
+    //        return s;
+    //    }
 
-        internal Spot GetToSpot()
-        {
-            Spot s = this.ToSpot;
-            if (s.IsDefault)
-            {
-                Link link = this.Link;
-                if (link != null)
-                {
-                    FrameworkElement port = link.ToPort;
-                    if (port != null)
-                    {
-                        s = Node.GetToSpot(port);  // normally, get Spot from the port
-                    }
-                }
-            }
-            return s;
-        }
-    }
+    //    internal Spot GetToSpot()
+    //    {
+    //        Spot s = this.ToSpot;
+    //        if (s.IsDefault)
+    //        {
+    //            Link link = this.Link;
+    //            if (link != null)
+    //            {
+    //                FrameworkElement port = link.ToPort;
+    //                if (port != null)
+    //                {
+    //                    s = Node.GetToSpot(port);  // normally, get Spot from the port
+    //                }
+    //            }
+    //        }
+    //        return s;
+    //    }
+    //}
 }

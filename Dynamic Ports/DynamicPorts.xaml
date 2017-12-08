@@ -122,10 +122,10 @@
         <DataTemplate x:Key="LinkTemplate">
             <go:LinkPanel go:Part.SelectionElementName="Path" go:Part.SelectionAdorned="True"
                     go:Part.Reshapable="True" >
-                <go:Link.Route>
+                <!--<go:Link.Route>
                     <local:CustomRoute Routing="Orthogonal" Corner="4"
                              RelinkableFrom="True" RelinkableTo="True" />
-                </go:Link.Route>
+                </go:Link.Route>-->
                 <go:LinkShape x:Name="Path" Stroke="Black" StrokeThickness="1" />
                 <go:LinkShape Stroke="Transparent" StrokeThickness="3" />
             </go:LinkPanel>
