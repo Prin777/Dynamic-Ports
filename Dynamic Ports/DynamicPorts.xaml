@@ -1,4 +1,4 @@
-﻿ <!-- Copyright © Northwoods Software Corporation, 2008-2013. All Rights Reserved. -->
+﻿<!-- Copyright © Northwoods Software Corporation, 2008-2013. All Rights Reserved. -->
 
 <UserControl x:Class="DynamicPorts.DynamicPorts"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -26,36 +26,25 @@
             <StackPanel Orientation="Vertical" />
         </ItemsPanelTemplate>
 
-        <DataTemplate x:Key="NodeTemplate">
+        <DataTemplate x:Key="TopNodeTemplate">
             <Grid go:Part.SelectionAdorned="True" go:Part.SelectionElementName="myShape"
             go:Node.Location="{Binding Path=Data.Location, Mode=TwoWay}">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-                <Rectangle Grid.Column="1" Grid.Row="1" x:Name="myShape"
+                <Rectangle x:Name="myShape"
                    Fill="LightGray" Stroke="Black" StrokeThickness="1"
                    HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                   MinWidth="50" MinHeight="50" />
-                <TextBlock Grid.Column="1" Grid.Row="1"
+                   MinWidth="1000" MinHeight="800" />
+                <TextBlock 
                    Text="{Binding Path=Data.Text, Mode=TwoWay}"
                    TextWrapping="Wrap" go:Part.TextEditable="True"
                    MaxWidth="150" Margin="4"
                    HorizontalAlignment="Center" VerticalAlignment="Center" />
 
-                <local:InertListBox Grid.Column="0" Grid.Row="1"
-                 Style="{StaticResource InertListBoxStyle}"
+                <local:InertListBox Style="{StaticResource InertListBoxStyle}"
                  ItemsPanel="{StaticResource VerticalItemsPanel}"
-                 ItemsSource="{Binding Path=Data.LeftSockets}">
+                 ItemsSource="{Binding Path=Data.LeftSockets}" HorizontalAlignment="Left">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <Rectangle Fill="{Binding Color}" Width="8" Height="8" Margin="0 1 0 1"
+                            <Rectangle Fill="{Binding Color}" Width="8" Height="8" Margin="-4 1 0 1"
                          go:Node.PortId="{Binding Name}" Tag="Left"
                          go:Node.LinkableTo="True" go:Node.ToSpot="MiddleLeft">
                                 <ToolTipService.ToolTip>
@@ -66,13 +55,12 @@
                     </ListBox.ItemTemplate>
                 </local:InertListBox>
 
-                <local:InertListBox Grid.Column="2" Grid.Row="1"
-                 Style="{StaticResource InertListBoxStyle}"
+                <local:InertListBox Style="{StaticResource InertListBoxStyle}"
                  ItemsPanel="{StaticResource VerticalItemsPanel}"
-                 ItemsSource="{Binding Path=Data.RightSockets}">
+                 ItemsSource="{Binding Path=Data.RightSockets}" HorizontalAlignment="Right">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <Rectangle Fill="{Binding Color}" Width="8" Height="8" Margin="0 1 0 1"
+                            <Rectangle Fill="{Binding Color}" Width="8" Height="8" Margin="0 1 -4 1"
                          go:Node.PortId="{Binding Name}" Tag="Right"
                          go:Node.LinkableFrom="True" go:Node.FromSpot="MiddleRight">
                                 <ToolTipService.ToolTip>
@@ -82,16 +70,30 @@
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </local:InertListBox>
+            </Grid>
+        </DataTemplate>
+        
+        <DataTemplate x:Key="NodeTemplate">
+            <Grid go:Part.SelectionAdorned="True" go:Part.SelectionElementName="myShape"
+            go:Node.Location="{Binding Path=Data.Location, Mode=TwoWay}">
+                <Rectangle x:Name="myShape"
+                   Fill="Transparent" Stroke="Black" StrokeThickness="1"
+                   HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                   MinWidth="80" MinHeight="60" />
+                <TextBlock 
+                   Text="{Binding Path=Data.Text, Mode=TwoWay}"
+                   TextWrapping="Wrap" go:Part.TextEditable="True"
+                   MaxWidth="150" Margin="4"
+                   HorizontalAlignment="Center" VerticalAlignment="Center" />
 
-                <!--<local:InertListBox Grid.Column="1" Grid.Row="0"
-                 Style="{StaticResource InertListBoxStyle}"
-                 ItemsPanel="{StaticResource HorizontalItemsPanel}"
-                 ItemsSource="{Binding Path=Data.TopSockets}">
+                <local:InertListBox Style="{StaticResource InertListBoxStyle}"
+                 ItemsPanel="{StaticResource VerticalItemsPanel}"
+                 ItemsSource="{Binding Path=Data.LeftSockets}" HorizontalAlignment="Left">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <Rectangle Fill="{Binding Color}" Width="8" Height="8" Margin="1 0 1 0"
-                         go:Node.PortId="{Binding Name}" Tag="Top"
-                         go:Node.LinkableTo="True" go:Node.ToSpot="MiddleTop">
+                            <Rectangle Fill="{Binding Color}" Width="8" Height="8" Margin="-8 1 0 1"
+                         go:Node.PortId="{Binding Name}" Tag="Left"
+                         go:Node.LinkableTo="True" go:Node.ToSpot="MiddleLeft">
                                 <ToolTipService.ToolTip>
                                     <TextBlock Text="{Binding Name}" />
                                 </ToolTipService.ToolTip>
@@ -100,22 +102,21 @@
                     </ListBox.ItemTemplate>
                 </local:InertListBox>
 
-                <local:InertListBox Grid.Column="1" Grid.Row="2"
-                 Style="{StaticResource InertListBoxStyle}"
-                 ItemsPanel="{StaticResource HorizontalItemsPanel}"
-                 ItemsSource="{Binding Path=Data.BottomSockets}">
+                <local:InertListBox Style="{StaticResource InertListBoxStyle}"
+                 ItemsPanel="{StaticResource VerticalItemsPanel}"
+                 ItemsSource="{Binding Path=Data.RightSockets}" HorizontalAlignment="Right">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <Rectangle Fill="{Binding Color}" Width="8" Height="8" Margin="1 0 1 0"
-                         go:Node.PortId="{Binding Name}" Tag="Bottom"
-                         go:Node.LinkableFrom="True" go:Node.FromSpot="MiddleBottom">
+                            <Rectangle Fill="{Binding Color}" Width="8" Height="8" Margin="0 1 -8 1"
+                         go:Node.PortId="{Binding Name}" Tag="Right"
+                         go:Node.LinkableFrom="True" go:Node.FromSpot="MiddleRight">
                                 <ToolTipService.ToolTip>
                                     <TextBlock Text="{Binding Name}" />
                                 </ToolTipService.ToolTip>
                             </Rectangle>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
-                </local:InertListBox>-->
+                </local:InertListBox>
             </Grid>
         </DataTemplate>
 
